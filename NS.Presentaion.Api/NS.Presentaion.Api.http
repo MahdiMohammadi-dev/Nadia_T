@@ -1,0 +1,6 @@
+@NS.Presentaion.Api_HostAddress = http://localhost:5274
+
+GET {{NS.Presentaion.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
