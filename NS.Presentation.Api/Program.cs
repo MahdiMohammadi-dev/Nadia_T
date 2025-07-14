@@ -2,12 +2,15 @@ using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using NS.Application.Products.Command;
 using NS.Infrastructure.Core;
+using NS.Presentation.Api.Controllers;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddApplicationPart(typeof(ProductsController).Assembly);
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
@@ -44,6 +47,7 @@ builder.Services.AddMediatR(typeof(CreateProductCommand).Assembly);
 builder.Services.AddAuthentication();
 builder.Services.AddHttpContextAccessor();
 var connectionStrings = builder.Configuration.GetConnectionString("NadiaSoft");
+
 Bootstrapper.Config(builder.Services,connectionStrings);
 
 var app = builder.Build();

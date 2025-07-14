@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using NS.Application.Products.Command;
 using NS.Application.Products.Queries;
 
-namespace NS.Presentaion.Api.Controllers
+namespace NS.Presentation.Api.Controllers
 {
     [Authorize]
     [Route("api/[controller]")]
@@ -32,6 +32,7 @@ namespace NS.Presentaion.Api.Controllers
      
         public async Task<IActionResult> Create([FromBody]CreateProductCommand command)
         {
+            Console.WriteLine("🔔 متد Create اجرا شد");
             await _mediator.Send(command);
             return Ok();
 

@@ -20,8 +20,6 @@ namespace NS.Infrastructure.Core
 
             builder.AddHttpContextAccessor();
 
-
-
             builder.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ProductDbContext>()
                 .AddDefaultTokenProviders();
