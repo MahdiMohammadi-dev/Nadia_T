@@ -27,7 +27,7 @@ namespace NS.Presentation.Api.Controllers
             var result = await _mediator.Send(new GetAllProductQueries());
             return Ok(result);
         }
-        [Authorize]
+        
         [HttpPost("Create")]
      
         public async Task<IActionResult> Create([FromBody]CreateProductCommand command)
@@ -37,7 +37,7 @@ namespace NS.Presentation.Api.Controllers
             return Ok();
 
         }
-        [Authorize]
+        
         [HttpDelete("Delete{id}")]
    
         public async Task<IActionResult> Delete([FromRoute]long id)
@@ -45,12 +45,13 @@ namespace NS.Presentation.Api.Controllers
              await _mediator.Send(new DeleteProductCommand(id));
             return Ok("محصول حذف شد");
         }
-        [Authorize]
+       
         [HttpPut("Edit")]
         public async Task<IActionResult> Edit([FromBody]EditProductCommand command)
         {
             await _mediator.Send(command);
             return Ok("محصول ویرایش شد");
         }
+
     }
 }
