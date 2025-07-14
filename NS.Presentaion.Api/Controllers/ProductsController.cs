@@ -21,32 +21,32 @@ namespace NS.Presentaion.Api.Controllers
 
         [AllowAnonymous]
         
-        [HttpGet]
+        [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll()
         {
             var result = await _mediator.Send(new GetAllProductQueries());
             return Ok(result);
         }
-
-        [HttpPost]
+        [Authorize]
+        [HttpPost("Create")]
      
-        public async Task<IActionResult> Create(CreateProductCommand command)
+        public async Task<IActionResult> Create([FromBody]CreateProductCommand command)
         {
             await _mediator.Send(command);
             return Ok();
 
         }
-
-        [HttpDelete("{id}")]
+        [Authorize]
+        [HttpDelete("Delete{id}")]
    
-        public async Task<IActionResult> Delete(long id)
+        public async Task<IActionResult> Delete([FromRoute]long id)
         {
              await _mediator.Send(new DeleteProductCommand(id));
             return Ok("محصول حذف شد");
         }
-
-        [HttpPut]
-        public async Task<IActionResult> Edit(EditProductCommand command)
+        [Authorize]
+        [HttpPut("Edit")]
+        public async Task<IActionResult> Edit([FromBody]EditProductCommand command)
         {
             await _mediator.Send(command);
             return Ok("محصول ویرایش شد");
