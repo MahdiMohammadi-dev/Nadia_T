@@ -58,7 +58,7 @@ namespace NS.Presentation.Api.Controllers
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("THIS_IS_SUPER_SECRET_KEY_FOR_JWT_123456"));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-            var token = new JwtSecurityToken(claims: claims, expires: DateTime.Now.AddHours(1), signingCredentials: creds);
+            var token = new JwtSecurityToken(claims: claims, expires: DateTime.Now.AddMonths(1), signingCredentials: creds);
 
             return Ok(new { token = new JwtSecurityTokenHandler().WriteToken(token) });
         }

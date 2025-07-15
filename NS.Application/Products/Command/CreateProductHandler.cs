@@ -18,6 +18,8 @@ namespace NS.Application.Products.Command
 
         public async Task<Unit> Handle(CreateProductCommand request, CancellationToken cancellationToken)
         {
+
+
             var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
             if (string.IsNullOrWhiteSpace(userId))

@@ -6,7 +6,7 @@ using NS.Application.Products.Queries;
 
 namespace NS.Presentation.Api.Controllers
 {
-    [Authorize]
+    
     [Route("api/[controller]")]
     [ApiController]
     public class ProductsController : ControllerBase
@@ -27,27 +27,29 @@ namespace NS.Presentation.Api.Controllers
             var result = await _mediator.Send(new GetAllProductQueries());
             return Ok(result);
         }
+
         
+        [Authorize]
         [HttpPost("Create")]
-     
-        public async Task<IActionResult> Create([FromBody]CreateProductCommand command)
+        
+        public async Task<IActionResult> Create(CreateProductCommand command)
         {
-            Console.WriteLine("🔔 متد Create اجرا شد");
             await _mediator.Send(command);
-            return Ok();
+            return Ok("محصول جدید ایجاد شد");
 
         }
-        
-        [HttpDelete("Delete{id}")]
+
+        [Authorize]
+        [HttpDelete("Delete/{id}")]
    
-        public async Task<IActionResult> Delete([FromRoute]long id)
+        public async Task<IActionResult> Delete(long id)
         {
              await _mediator.Send(new DeleteProductCommand(id));
             return Ok("محصول حذف شد");
         }
-       
+        [Authorize]
         [HttpPut("Edit")]
-        public async Task<IActionResult> Edit([FromBody]EditProductCommand command)
+        public async Task<IActionResult> Edit(EditProductCommand command)
         {
             await _mediator.Send(command);
             return Ok("محصول ویرایش شد");
